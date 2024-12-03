@@ -13,7 +13,7 @@ public class Main implements NativeMouseInputListener {
     final int MOUSE_BUTTON_5 = 5; //forward mouse button
     final int MOUSE_DRAG_DISTANCE_THRESHOLD = 200; //required cursor distance from starting point to current
 
-    boolean rollPressed = false;
+    boolean rollerPressed = false;
     int startingPointX = 0;
 
     final Robot robot;
@@ -25,7 +25,7 @@ public class Main implements NativeMouseInputListener {
     @Override
     public void nativeMousePressed(NativeMouseEvent nativeEvent) {
         if (nativeEvent.getButton() == NativeMouseEvent.BUTTON3) {
-            rollPressed = true;
+            rollerPressed = true;
             startingPointX = nativeEvent.getX();
         }
     }
@@ -39,8 +39,8 @@ public class Main implements NativeMouseInputListener {
 
     @Override
     public void nativeMouseDragged(NativeMouseEvent nativeEvent) {
-        //check if roll is pressed and starting point X set
-        if (rollPressed) {
+        //check if roller is pressed and starting point X set
+        if (rollerPressed) {
             if (startingPointX != 0) {
                 int currentDistanceToStartingPointX = startingPointX - nativeEvent.getX();
 
@@ -63,7 +63,7 @@ public class Main implements NativeMouseInputListener {
 
     //required to avoid navigating multiple times during single press
     private void resetRollPressInfo() {
-        rollPressed = false;
+        rollerPressed = false;
         startingPointX = 0;
     }
 
